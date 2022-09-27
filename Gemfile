@@ -10,3 +10,7 @@ gem "rake", "~> 13.0"
 gem "minitest", "~> 5.0"
 
 gem "rubocop", "~> 1.21"
+
+gem "faker", "~> 2.23"
+
+gem "rubocop-faker", "~> 1.1"
