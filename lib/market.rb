@@ -2,13 +2,13 @@
 
 class Market
   def initialize
-    @repository = []
+    @repository = Set.new
     super
   end
 
   def submit(order)
-    @repository.push(order)
-    @repository.index(order) + 1
+    @repository.add(order)
+    @repository.find_index(order) + 1
   end
 
   def market_price; end
