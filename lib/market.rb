@@ -16,10 +16,10 @@ class Market
   def market_depth
     buy_orders = @repository.find_all do |order|
                    order.order_type == ORDER_TYPE[:BUY]
-                 end.map { |order| [order.euro, order.bitcoin.to_s("F")] }
+                 end.map { |order| [order.euro, order.bitcoin.to_s] }
     sell_orders = @repository.find_all do |order|
                     order.order_type == ORDER_TYPE[:SELL]
-                  end.map { |order| [order.euro, order.bitcoin.to_s("F")] }
+                  end.map { |order| [order.euro, order.bitcoin.to_s] }
     { bids: buy_orders, asks: sell_orders }
   end
 

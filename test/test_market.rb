@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class TestRuby < Minitest::Test
+class TestMarket < Minitest::Test
   def test_market_should_submit_one_buy_order
     market = Market.new
     order = OrderBuilder.buy
@@ -10,7 +10,7 @@ class TestRuby < Minitest::Test
     order_id = market.submit(order)
 
     assert_equal(1, order_id)
-    assert_equal({ "bids": [[order.euro, order.bitcoin.to_s("F")]], "asks": [] }, market.market_depth)
+    assert_equal({ "bids": [[order.euro, order.bitcoin.to_s]], "asks": [] }, market.market_depth)
   end
 
   def test_should_submit_one_sell_order
@@ -19,7 +19,7 @@ class TestRuby < Minitest::Test
 
     market.submit(order)
 
-    assert_equal({ "bids": [], "asks": [[order.euro, order.bitcoin.to_s("F")]] }, market.market_depth)
+    assert_equal({ "bids": [], "asks": [[order.euro, order.bitcoin.to_s]] }, market.market_depth)
   end
 end
 
