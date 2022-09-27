@@ -18,12 +18,14 @@ class Market
   end
 
   def market_depth
-    buy_orders = find_all_orders_by(ORDER_TYPE[:BUY]).map { |order| [order.euro, order.bitcoin.to_s] }
-    sell_orders = find_all_orders_by(ORDER_TYPE[:SELL]).map { |order| [order.euro, order.bitcoin.to_s] }
+    buy_orders = find_all_orders_by(ORDER_TYPE[:BUY]).map { |order| [order.euro.to_s, order.bitcoin.to_s] }
+    sell_orders = find_all_orders_by(ORDER_TYPE[:SELL]).map { |order| [order.euro.to_s, order.bitcoin.to_s] }
     { bids: buy_orders, asks: sell_orders }
   end
 
-  def cancel_order(id); end
+  def cancel_order(id)
+    @repository = @repository.reject.with_index { |_, index| index == id - 1 }
+  end
 
   private
 
