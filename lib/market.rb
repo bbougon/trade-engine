@@ -11,17 +11,25 @@ class Market
     @repository.find_index(order) + 1
   end
 
-  def market_price; end
+  def market_price
+    maximum_buy_price = find_all_orders_by(ORDER_TYPE[:BUY]).map { |order| order.euro.value }.max
+    minimum_sell_price = find_all_orders_by(ORDER_TYPE[:SELL]).map { |order| order.euro.value }.min
+    ((maximum_buy_price + minimum_sell_price) / 2).to_f
+  end
 
   def market_depth
-    buy_orders = @repository.find_all do |order|
-                   order.order_type == ORDER_TYPE[:BUY]
-                 end.map { |order| [order.euro, order.bitcoin.to_s] }
-    sell_orders = @repository.find_all do |order|
-                    order.order_type == ORDER_TYPE[:SELL]
-                  end.map { |order| [order.euro, order.bitcoin.to_s] }
+    buy_orders = find_all_orders_by(ORDER_TYPE[:BUY]).map { |order| [order.euro, order.bitcoin.to_s] }
+    sell_orders = find_all_orders_by(ORDER_TYPE[:SELL]).map { |order| [order.euro, order.bitcoin.to_s] }
     { bids: buy_orders, asks: sell_orders }
   end
 
   def cancel_order(id); end
+
+  private
+
+  def find_all_orders_by(order_type)
+    @repository.find_all do |order|
+      order.order_type == order_type
+    end
+  end
 end

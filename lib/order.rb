@@ -3,20 +3,31 @@
 require "bigdecimal"
 require "bigdecimal/util"
 
-class Bitcoin
-  def initialize(value, position)
-    @value = value
-    @position = position
-  end
-
-  def self.create(bitcoin)
-    dot_position = bitcoin.index(".")
-    bitcoin_integer_value = BigDecimal(bitcoin).mult(100_000_000, 0).to_i
-    Bitcoin.new(bitcoin_integer_value, dot_position)
+class Currency
+  def initialize(currency, multiplier)
+    @position = currency.index(".")
+    @multiplier = multiplier
+    @value = BigDecimal(currency).mult(@multiplier, 0).to_i
   end
 
   def to_s
     @value.to_s.insert(@position, ".")
+  end
+
+  def value
+    (@value / @multiplier).to_f
+  end
+end
+
+class Bitcoin < Currency
+  def self.create(bitcoin)
+    Bitcoin.new(bitcoin, 100_000_000)
+  end
+end
+
+class Euro < Currency
+  def self.create(euro)
+    Euro.new(euro, 100)
   end
 end
 
@@ -26,7 +37,7 @@ ORDER_TYPE = {
 }.freeze
 class Order
   def initialize(euro, bitcoin)
-    @euro = euro
+    @euro = Euro.create(euro)
     @bitcoin = Bitcoin.create(bitcoin)
   end
 

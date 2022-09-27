@@ -21,6 +21,27 @@ class TestMarket < Minitest::Test
 
     assert_equal({ "bids": [], "asks": [[order.euro, order.bitcoin.to_s]] }, market.market_depth)
   end
+
+  def test_should_display_market_price
+    market = Market.new
+    first_order = OrderBuilder.buy("1.80", "1.5")
+    second_order = OrderBuilder.buy("2.00", "1.0")
+    third_order = OrderBuilder.sell("3.2", "1.5")
+    fourth_order = OrderBuilder.sell("3.0", "1.0")
+    market.submit(first_order)
+    market.submit(second_order)
+    market.submit(third_order)
+    market.submit(fourth_order)
+
+    price = market.market_price
+
+    assert_equal(2.5, price)
+    assert_equal(
+      { "asks": [[third_order.euro, third_order.bitcoin.to_s], [fourth_order.euro, fourth_order.bitcoin.to_s]],
+        "bids": [[first_order.euro, first_order.bitcoin.to_s],
+                 [second_order.euro, second_order.bitcoin.to_s]] }, market.market_depth
+    )
+  end
 end
 
 require_relative "../lib/market"
