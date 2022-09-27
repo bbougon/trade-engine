@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require "bigdecimal"
-require 'bigdecimal/util'
+require "bigdecimal/util"
 
 ORDER_TYPE = {
   BUY: 1,
   SELL: 2
-}
+}.freeze
 class Order
   def initialize(euro, bitcoin)
     @euro = euro

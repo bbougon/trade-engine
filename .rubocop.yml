@@ -1,5 +1,8 @@
 AllCops:
   TargetRubyVersion: 2.6
+  SuggestExtensions:
+    rubocop-minitest: true
+    rubocop-rake: true
 
 Style/StringLiterals:
   Enabled: true
@@ -8,6 +11,12 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   Enabled: true
   EnforcedStyle: double_quotes
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
 
 Layout/LineLength:
   Max: 120
