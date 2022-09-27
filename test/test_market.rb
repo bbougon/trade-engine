@@ -24,5 +24,5 @@ class TestRuby < Minitest::Test
 end
 
 require_relative "../lib/market"
-require_relative "../lib/buy_order"
+require_relative "../lib/order"
 require_relative "order_builder"
