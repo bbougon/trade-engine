@@ -1,5 +1,8 @@
 # Backend challenge
 
+
+[Miro Board](https://miro.com/app/board/uXjVPSu3um4=/)
+
 ## Guidelines
 
 - Solve the levels in ascending order
@@ -187,6 +190,3 @@ If there is a match at 1 BTC with 27000€ per BTC then fees are (1 * 27000) * 0
 We have a BTC/EUR market with matching engine and we want to have a new market ETH/EUR using the same matching engine.
 
 Adapt your code to reflect this change.
-
-## Links
-[Miro](https://miro.com/app/board/uXjVPSu3um4=/)
