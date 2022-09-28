@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby (0.1.0)
+    Trading-Engine (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -43,12 +43,12 @@ PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  Trading-Engine!
   faker (~> 2.23)
   minitest (~> 5.0)
   rake (~> 13.0)
   rubocop (~> 1.21)
   rubocop-faker (~> 1.1)
-  ruby!
 
 BUNDLED WITH
    2.3.22
