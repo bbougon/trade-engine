@@ -31,29 +31,29 @@ class Euro < Currency
   end
 end
 
-ORDER_TYPE = {
+SIDE = {
   BUY: 1,
   SELL: 2
 }.freeze
 class Order
-  def initialize(euro, bitcoin)
-    @euro = Euro.create(euro)
-    @bitcoin = Bitcoin.create(bitcoin)
+  def initialize(price, amount)
+    @price = Euro.create(price)
+    @amount = Bitcoin.create(amount)
   end
 
-  attr_reader :euro, :bitcoin, :order_type
+  attr_reader :price, :amount, :side
 end
 
 class BuyOrder < Order
-  def initialize(euro, bitcoin)
-    @order_type = ORDER_TYPE[:BUY]
-    super euro, bitcoin
+  def initialize(price, amount)
+    @side = SIDE[:BUY]
+    super price, amount
   end
 end
 
 class SellOrder < Order
-  def initialize(euro, bitcoin)
-    @order_type = ORDER_TYPE[:SELL]
-    super euro, bitcoin
+  def initialize(price, amount)
+    @side = SIDE[:SELL]
+    super price, amount
   end
 end

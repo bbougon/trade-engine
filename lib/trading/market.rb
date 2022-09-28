@@ -12,15 +12,15 @@ class Market
   end
 
   def market_price
-    maximum_buy_price = @repository.find_all_orders_by(ORDER_TYPE[:BUY]).map { |order| order.euro.value }.max
-    minimum_sell_price = @repository.find_all_orders_by(ORDER_TYPE[:SELL]).map { |order| order.euro.value }.min
+    maximum_buy_price = @repository.find_all_orders_by(SIDE[:BUY]).map { |order| order.price.value }.max
+    minimum_sell_price = @repository.find_all_orders_by(SIDE[:SELL]).map { |order| order.price.value }.min
     ((maximum_buy_price + minimum_sell_price) / 2).to_f
   end
 
   def market_depth
-    buy_orders = @repository.find_all_orders_by(ORDER_TYPE[:BUY]).map { |order| [order.euro.to_s, order.bitcoin.to_s] }
-    sell_orders = @repository.find_all_orders_by(ORDER_TYPE[:SELL]).map do |order|
-      [order.euro.to_s, order.bitcoin.to_s]
+    buy_orders = @repository.find_all_orders_by(SIDE[:BUY]).map { |order| [order.price.to_s, order.amount.to_s] }
+    sell_orders = @repository.find_all_orders_by(SIDE[:SELL]).map do |order|
+      [order.price.to_s, order.amount.to_s]
     end
     { bids: buy_orders, asks: sell_orders }
   end

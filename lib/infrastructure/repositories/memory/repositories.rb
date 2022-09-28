@@ -17,7 +17,7 @@ module MemoryRepositories
     end
 
     def delete_by_id(id)
-      @entities = @entities.reject.with_index { |_, index| index == id - 1 }
+      @entities = @entities.reject.with_index { |_, index| index == id - 1 }.to_set
     end
   end
 
@@ -26,7 +26,7 @@ module MemoryRepositories
 
     def find_all_orders_by(order_type)
       @entities.find_all do |order|
-        order.order_type == order_type
+        order.side == order_type
       end
     end
   end
