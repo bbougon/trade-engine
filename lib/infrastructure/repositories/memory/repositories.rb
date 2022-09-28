@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../../repository"
-require_relative "../../../order_repository"
+require_relative "../../../trading/order_repository"
 
 module MemoryRepositories
   class MemoryRepository

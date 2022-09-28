@@ -9,4 +9,4 @@ class TestOrder < Minitest::Test
   end
 end
 
-require_relative "../lib/order"
+require_relative "../lib/trading/order"

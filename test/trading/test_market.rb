@@ -56,6 +56,6 @@ class TestMarket < Minitest::Test
   end
 end
 
-require_relative "../lib/market"
-require_relative "../lib/order"
+require_relative "../lib/trading/market"
+require_relative "../lib/trading/order"
 require_relative "order_builder"

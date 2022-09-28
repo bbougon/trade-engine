@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "infrastructure/repositories/memory/repositories"
+require_relative "../infrastructure/repositories/memory/repositories"
 class Market
   def initialize
     @repository = MemoryRepositories::MemoryOrderRepository.new
