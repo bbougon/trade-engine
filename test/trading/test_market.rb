@@ -10,7 +10,7 @@ class TestMarket < Minitest::Test
     order_id = market.submit(order)
 
     assert_equal(1, order_id)
-    assert_equal({ "bids": [[order.price.to_s, order.amount.to_s]], "asks": [] }, market.market_depth)
+    assert_equal({ bids: [[order.price.to_s, order.amount.to_s]], asks: [] }, market.market_depth)
   end
 
   def test_should_submit_one_sell_order
@@ -19,7 +19,7 @@ class TestMarket < Minitest::Test
 
     market.submit(order)
 
-    assert_equal({ "bids": [], "asks": [[order.price.to_s, order.amount.to_s]] }, market.market_depth)
+    assert_equal({ bids: [], asks: [[order.price.to_s, order.amount.to_s]] }, market.market_depth)
   end
 
   def test_should_display_market_price
@@ -37,10 +37,9 @@ class TestMarket < Minitest::Test
 
     assert_equal(2.5, price)
     assert_equal(
-      { "asks": [[third_order.price.to_s, third_order.amount.to_s],
-                 [fourth_order.price.to_s, fourth_order.amount.to_s]],
-        "bids": [[first_order.price.to_s, first_order.amount.to_s],
-                 [second_order.price.to_s, second_order.amount.to_s]] }, market.market_depth
+      { asks: [[third_order.price.to_s, third_order.amount.to_s], [fourth_order.price.to_s, fourth_order.amount.to_s]],
+        bids: [[first_order.price.to_s, first_order.amount.to_s],
+               [second_order.price.to_s, second_order.amount.to_s]] }, market.market_depth
     )
   end
 
@@ -52,7 +51,7 @@ class TestMarket < Minitest::Test
 
     market.cancel_order(order_id)
 
-    assert_equal({ "asks": [[sell_order.price.to_s, sell_order.amount.to_s]], "bids": [] }, market.market_depth)
+    assert_equal({ asks: [[sell_order.price.to_s, sell_order.amount.to_s]], bids: [] }, market.market_depth)
   end
 
   def test_should_submit_an_order_after_cancel
@@ -63,7 +62,7 @@ class TestMarket < Minitest::Test
     sell_order = OrderBuilder.sell
     market.submit(sell_order)
 
-    assert_equal({ "asks": [[sell_order.price.to_s, sell_order.amount.to_s]], "bids": [] }, market.market_depth)
+    assert_equal({ asks: [[sell_order.price.to_s, sell_order.amount.to_s]], bids: [] }, market.market_depth)
   end
 end
 
