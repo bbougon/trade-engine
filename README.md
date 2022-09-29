@@ -5,6 +5,7 @@
 
 ### Onboarding
 [Miro Board](https://miro.com/app/board/uXjVPSu3um4=/)
+[Logbook](https://github.com/bbougon/trade-engine/wiki/logkbook.md)
 
 **Prerequisites :**
 - Have a `3.1.2` ruby version (through [rbenv](https://github.com/rbenv/rbenv) for example)
