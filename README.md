@@ -1,14 +1,38 @@
 # Backend challenge
 
 
+## Project
+
+### Onboarding
 [Miro Board](https://miro.com/app/board/uXjVPSu3um4=/)
 
-## Guidelines
+**Prerequisites :**
+- Have a `3.1.2` ruby version (through [rbenv](https://github.com/rbenv/rbenv) for example)
+- Run `bundle install`
+- Run `rake` and check everything is running fine:
+  ```shell
+  Run options: --seed 16219
+  
+  # Running:
+  
+  ......
+  
+  Finished in 0.001239s, 4842.6150 runs/s, 7263.9225 assertions/s.
+  
+  6 runs, 9 assertions, 0 failures, 0 errors, 0 skips
+  Running RuboCop...
+  Inspecting 13 files
+  .............
+  
+  13 files inspected, no offenses detected
+  ```
+
+### Guidelines
 
 - Solve the levels in ascending order
 - Only do one commit per level and include the `.git` when submiting your test
 
-## Pointers
+### Pointers
 
 You can have a look at the higher levels, but please do the simplest thing that could work for the level you're currently solving.
 
@@ -24,7 +48,7 @@ Please also note that:
 - All prices and amounts are stored as BigDecimal
 - Running `irb` and `require_relative 'main' ` from the level folder must be able to interact with your program but of course feel free to add more files if needed.
 
-## Intro
+### Intro
 
 We want to build a simplified trade engine for exchanging currencies
 
@@ -39,7 +63,7 @@ An order is composed by :
 * a price (in EUR per BTC)
 * a side (buy or sell)
 
-## Level 1
+### Level 1
 
 * We can submit multiple 'buy' orders and 'sell' orders to a market.
 * We can cancel an order with his id.
@@ -104,7 +128,7 @@ An order is composed by :
 
 ```
 
-## Level 2
+### Level 2
 
 To use this market a user has a BTC balance and a EUR balance.
 An order has an initial state set to 'created'.
@@ -158,7 +182,7 @@ Adapt code to perform matching order.
 
 ```
 
-## Level 3
+### Level 3
 
 For each match we want to take a fee. An additional 0.25% from (price * amount) will be debited from seller EUR balance and buyer EUR balance and will be credited on eur balance to a 'fee' user.
 
@@ -185,7 +209,7 @@ If there is a match at 1 BTC with 27000€ per BTC then fees are (1 * 27000) * 0
 
 ```
 
-## Level 4
+### Level 4
 
 We have a BTC/EUR market with matching engine and we want to have a new market ETH/EUR using the same matching engine.
 
