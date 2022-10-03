@@ -7,6 +7,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    atomic (1.1.101)
+    avl_tree (1.2.1)
+      atomic (~> 1.1)
     concurrent-ruby (1.1.10)
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
@@ -45,6 +48,7 @@ PLATFORMS
 
 DEPENDENCIES
   Trading-Engine!
+  avl_tree (~> 1.2)
   faker (~> 2.23)
   minitest (~> 5.0)
   rake (~> 13.0)

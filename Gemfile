@@ -14,3 +14,5 @@ gem "rubocop", "~> 1.21"
 gem "faker", "~> 2.23"
 
 gem "rubocop-faker", "~> 1.1"
+
+gem "avl_tree", "~> 1.2"
