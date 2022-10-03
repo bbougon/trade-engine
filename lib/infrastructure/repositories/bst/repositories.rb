@@ -8,16 +8,12 @@ module BSTRepositories
   class BSTRepository
     include Repository
 
-    def persist(entity)
-      execute(entity)
+    def persist(_entity)
+      raise "Not Implemented"
     end
 
     def delete_by_id(id)
       delete(id)
-    end
-
-    def execute(_entity)
-      raise "Not Implemented"
     end
 
     def delete(_id)
@@ -34,7 +30,7 @@ module BSTRepositories
       super
     end
 
-    def execute(entity)
+    def persist(entity)
       @entities[entity.side][entity.price.to_s] = Set.new([entity])
       index = @indexes.size + 1
       @indexes.store(index, entity.__id__)
