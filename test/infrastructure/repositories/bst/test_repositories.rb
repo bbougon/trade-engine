@@ -37,4 +37,28 @@ class TestBSTRepository < Minitest::Test
     )
     assert_equal([1, 2, 3, 4, 8], [first_id, second_id, third_id, fourth_id, eigth_id])
   end
+
+  def test_should_delete_by_id
+    repository = BSTRepositories::BSTOrderRepository.new
+    first_buy_order = OrderBuilder.buy("5.00", "0.00000002")
+    second_buy_order = OrderBuilder.buy("6.00", "0.00000003")
+    third_buy_order = OrderBuilder.buy("3.00", "0.00000001")
+    first_sell_order = OrderBuilder.sell("5.00", "0.00000002")
+    second_sell_order = OrderBuilder.sell("6.00", "0.00000003")
+    repository.persist(first_buy_order)
+    second_id = repository.persist(second_buy_order)
+    repository.persist(third_buy_order)
+    repository.persist(first_sell_order)
+    fifth_id = repository.persist(second_sell_order)
+
+    repository.delete_by_id(second_id)
+    repository.delete_by_id(fifth_id)
+
+    assert_equal(
+      [third_buy_order, first_buy_order], repository.find_all_orders_by(SIDE[:BUY])
+    )
+    assert_equal(
+      [first_sell_order], repository.find_all_orders_by(SIDE[:SELL])
+    )
+  end
 end

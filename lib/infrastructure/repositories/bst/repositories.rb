@@ -12,11 +12,15 @@ module BSTRepositories
       execute(entity)
     end
 
-    def delete_by_id(_id)
-      super
+    def delete_by_id(id)
+      delete(id)
     end
 
     def execute(_entity)
+      raise "Not Implemented"
+    end
+
+    def delete(_id)
       raise "Not Implemented"
     end
   end
@@ -36,8 +40,14 @@ module BSTRepositories
       @indexes.find_index(entity.__id__) + 1
     end
 
+    def delete(id)
+      order_id = @indexes.to_a[id - 1]
+      @entities[SIDE[:BUY]].each_value { |order_set| delete_order(order_id, order_set) }
+      @entities[SIDE[:SELL]].each_value { |order_set| delete_order(order_id, order_set) }
+    end
+
     def find_all_orders_by(order_type)
-      @entities[order_type].each(&method(:bet_element)).sort_by do |key, _value|
+      @entities[order_type].each(&method(:get_element)).sort_by do |key, _value|
         BigDecimal(key)
       end.flat_map do |_element, order_set|
         order_set.flat_map do |order|
@@ -48,7 +58,11 @@ module BSTRepositories
 
     private
 
-    def bet_element(element)
+    def delete_order(order_id, order_set)
+      order_set.delete_if { |order| order.__id__ == order_id }
+    end
+
+    def get_element(element)
       element
     end
   end
