@@ -26,11 +26,14 @@ module BSTRepositories
 
     def initialize
       @entities = { SIDE[:BUY] => AVLTree.new, SIDE[:SELL] => AVLTree.new }
+      @indexes = Set.new
       super
     end
 
     def execute(entity)
       @entities[entity.side][entity.price.to_s] = Set.new([entity])
+      @indexes.add(entity.__id__)
+      @indexes.find_index(entity.__id__) + 1
     end
 
     def find_all_orders_by(order_type)

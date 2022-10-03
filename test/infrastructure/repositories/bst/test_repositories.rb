@@ -19,14 +19,14 @@ class TestBSTRepository < Minitest::Test
     third_sell_order = OrderBuilder.sell("3.00", "0.00000001")
     fourth_sell_order = OrderBuilder.sell("12500.00", "0.86718291")
 
-    repository.persist(first_buy_order)
-    repository.persist(second_buy_order)
-    repository.persist(third_buy_order)
-    repository.persist(fourth_buy_order)
+    first_id = repository.persist(first_buy_order)
+    second_id = repository.persist(second_buy_order)
+    third_id = repository.persist(third_buy_order)
+    fourth_id = repository.persist(fourth_buy_order)
     repository.persist(first_sell_order)
     repository.persist(second_sell_order)
     repository.persist(third_sell_order)
-    repository.persist(fourth_sell_order)
+    eigth_id = repository.persist(fourth_sell_order)
 
     assert_equal(
       [third_buy_order, first_buy_order, second_buy_order, fourth_buy_order], repository.find_all_orders_by(SIDE[:BUY])
@@ -35,5 +35,6 @@ class TestBSTRepository < Minitest::Test
       [third_sell_order, first_sell_order, second_sell_order,
        fourth_sell_order], repository.find_all_orders_by(SIDE[:SELL])
     )
+    assert_equal([1, 2, 3, 4, 8], [first_id, second_id, third_id, fourth_id, eigth_id])
   end
 end
