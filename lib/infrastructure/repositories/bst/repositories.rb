@@ -30,20 +30,22 @@ module BSTRepositories
 
     def initialize
       @entities = { SIDE[:BUY] => AVLTree.new, SIDE[:SELL] => AVLTree.new }
-      @indexes = Set.new
+      @indexes = {}
       super
     end
 
     def execute(entity)
       @entities[entity.side][entity.price.to_s] = Set.new([entity])
-      @indexes.add(entity.__id__)
-      @indexes.find_index(entity.__id__) + 1
+      index = @indexes.size + 1
+      @indexes.store(index, entity.__id__)
+      index
     end
 
     def delete(id)
-      order_id = @indexes.to_a[id - 1]
+      order_id = @indexes.fetch(id)
       @entities[SIDE[:BUY]].each_value { |order_set| delete_order(order_id, order_set) }
       @entities[SIDE[:SELL]].each_value { |order_set| delete_order(order_id, order_set) }
+      @indexes.delete(id)
     end
 
     def find_all_orders_by(order_type)
