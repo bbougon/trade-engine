@@ -37,9 +37,9 @@ class TestMarket < Minitest::Test
 
     assert_equal(2.5, price)
     assert_equal(
-      { asks: [[third_order.price.to_s, third_order.amount.to_s], [fourth_order.price.to_s, fourth_order.amount.to_s]],
-        bids: [[first_order.price.to_s, first_order.amount.to_s],
-               [second_order.price.to_s, second_order.amount.to_s]] }, market.market_depth
+      { asks: [[fourth_order.price.to_s, fourth_order.amount.to_s], [third_order.price.to_s, third_order.amount.to_s]],
+        bids: [[second_order.price.to_s, second_order.amount.to_s],
+               [first_order.price.to_s, first_order.amount.to_s]] }, market.market_depth
     )
   end
 

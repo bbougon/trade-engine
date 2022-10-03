@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "../infrastructure/repositories/memory/repositories"
+require_relative "../infrastructure/repositories/bst/repositories"
 class Market
   def initialize
-    @repository = MemoryRepositories::MemoryOrderRepository.new
+    @repository = BSTRepositories::BSTOrderRepository.new
     super
   end
 
@@ -18,7 +18,9 @@ class Market
   end
 
   def market_depth
-    buy_orders = @repository.find_all_orders_by(SIDE[:BUY]).map { |order| [order.price.to_s, order.amount.to_s] }
+    buy_orders = @repository.find_all_orders_by(SIDE[:BUY]).reverse.map do |order|
+      [order.price.to_s, order.amount.to_s]
+    end
     sell_orders = @repository.find_all_orders_by(SIDE[:SELL]).map do |order|
       [order.price.to_s, order.amount.to_s]
     end
