@@ -6,11 +6,13 @@ require "bigdecimal/util"
 class Currency
   def initialize(currency, multiplier)
     @position = currency.index(".")
-    @multiplier = multiplier
+    @multiplier = BigDecimal(multiplier.to_s)
     @value = BigDecimal(currency).mult(@multiplier, 0).to_i
   end
 
   def to_s
+    return BigDecimal(value.to_s).to_s("F") if @multiplier > @value
+
     @value.to_s.insert(@position, ".")
   end
 
@@ -21,13 +23,13 @@ end
 
 class Bitcoin < Currency
   def self.create(bitcoin)
-    Bitcoin.new(bitcoin, 100_000_000)
+    Bitcoin.new(bitcoin, 10**8)
   end
 end
 
 class Euro < Currency
   def self.create(euro)
-    Euro.new(euro, 100)
+    Euro.new(euro, 10**2)
   end
 end
 
